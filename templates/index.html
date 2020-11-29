@@ -6,10 +6,21 @@
 </head>
 <body>
 <h3>{{ title }}</h3>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="OK" >
-</form>
+<ul>
+    {% for v in mylist %}
+    <li>{{ v.name }}:{{ v.hireDate }}</li>
+    {% endfor %}
+</ul>
+{#<form method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" value="OK" >#}
+{#</form>#}
+{% if previous_week %}
+上月:{{ previous_week }}
+{% endif %}
+{% if next_week %}
+下月：{{ next_week }}
+{% endif %}
 </body>
 </html>
