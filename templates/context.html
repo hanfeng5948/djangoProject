@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <title>{{ sminfo.TITLE }}</title>
+</head>
+<body>
+<h3>{{ sminfo.TITLE }}</h3>
+{% autoescape off %}
+<table style="font-size: 14px;">
+    {{ sminfo.HTITLE }}
+    <br>
+    {{ sminfo.ZHUCHI }},{{ sminfo.ADDRESS }}
+    <div class="fieldBox">
+    {{  sminfo.CONTENT }}
+    </div>
+</table>
+{% endautoescape %}
+
+</body>
+</html>
