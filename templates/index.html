@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h3>{{ title }}</h3>
-<ul>
-    {% for v in mylist %}
-    <li>{{ v.name }}:{{ v.hireDate }}</li>
-    {% endfor %}
-</ul>
-{#<form method="post">#}
-{#    {% csrf_token %}#}
-{#    {{ form.as_p }}#}
-{#    <input type="submit" value="OK" >#}
-{#</form>#}
-{% if previous_week %}
-上月:{{ previous_week }}
-{% endif %}
-{% if next_week %}
-下月：{{ next_week }}
-{% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    <link rel="icon" href="{{ static('favicon.ico') }}">
+    <title>jinja2</title>
+{% endblock %}
+
+{% block body %}
+<div></div>
+{% endblock %}
