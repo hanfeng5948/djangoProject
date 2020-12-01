@@ -5,5 +5,18 @@
 {% endblock %}
 
 {% block body %}
-<div></div>
+<div>{{ value['name'] }}</div>
+<div>
+    {{ value['name'] | replace('Python','Jinja2') }}
+</div>
+{% for k,v in value.items() %}
+    <div>value is {{ v }}</div>
+    <div>key is {{ k }}</div>
+{% endfor %}
+{% if value %}
+<div>This is if</div>
+{% else %}
+    <div>This is else</div>
+{% endif %}
+<a href="{{ url('index:index') }}">首页</a>
 {% endblock %}
