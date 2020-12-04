@@ -39,3 +39,20 @@ class SmInfo(models.Model):
     HTITLE = models.CharField(max_length=254, verbose_name='信息副标题')
     FILENAME = models.CharField(max_length=254, verbose_name='信息附件')
     LAIYUAN = models.CharField(max_length=254, verbose_name='信息来源')
+
+
+class lm(models.Model):
+    id = models.AutoField(primary_key=True)
+    lm = models.IntegerField(db_index=True)
+    lmtitle = models.CharField(max_length=32, null=True, blank=True)
+    lmlevel = models.IntegerField()
+    lmcode = models.CharField(max_length=27, default='001000000')
+    pic = models.CharField(max_length=254, null=True, blank=True)
+    mb = models.IntegerField(default=10)
+    fontcolor = models.CharField(default='#000000', max_length=10)
+    show = models.BooleanField(default=True)
+    is_delete = models.BooleanField(default=False)
+    up_user = models.TextField(default='admin', blank=True, null=True)
+
+    class Meta:
+        ordering = ('lm', 'lmlevel')
