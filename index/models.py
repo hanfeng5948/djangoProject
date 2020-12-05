@@ -1,5 +1,3 @@
-from django.db import models
-
 # Create your models here.
 from django.db import models
 from django.utils.timezone import now
@@ -15,9 +13,13 @@ class PersonInfo(models.Model):
 
 class SmInfo(models.Model):
     ID = models.AutoField(primary_key=True)
-    LM = models.CharField(max_length=50, verbose_name='栏目一')
-    LM2 = models.CharField(max_length=50, verbose_name='栏目二')
-    LM3 = models.CharField(max_length=50, verbose_name='栏目三')
+    # LM = models.CharField(max_length=50, verbose_name='栏目一')
+    LM = models.ForeignKey('lm',
+                           related_name='old_lmcode',
+                           default='30',
+                           on_delete=models.SET_DEFAULT,
+                           )
+    # LM3 = models.CharField(max_length=50, verbose_name='栏目三')
     PAIXU = models.IntegerField(verbose_name='排序')
     TITLE = models.CharField(max_length=150, verbose_name='标题')
     ADDRESS = models.CharField(max_length=254, verbose_name='寺庙地址')
@@ -43,7 +45,7 @@ class SmInfo(models.Model):
 
 class lm(models.Model):
     id = models.AutoField(primary_key=True)
-    lm = models.IntegerField(db_index=True)
+    lmoldcode = models.IntegerField(db_index=True)
     lmtitle = models.CharField(max_length=32, null=True, blank=True)
     lmlevel = models.IntegerField()
     lmcode = models.CharField(max_length=27, default='001000000')
@@ -55,4 +57,4 @@ class lm(models.Model):
     up_user = models.TextField(default='admin', blank=True, null=True)
 
     class Meta:
-        ordering = ('lm', 'lmlevel')
+        ordering = ('lmoldcode', 'lmlevel')
