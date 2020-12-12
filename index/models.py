@@ -42,6 +42,13 @@ class SmInfo(models.Model):
     FILENAME = models.CharField(max_length=254, verbose_name='信息附件')
     LAIYUAN = models.CharField(max_length=254, verbose_name='信息来源')
 
+    def __str__(self):
+        return self.TITLE
+
+    class Meta:
+        verbose_name = '寺庙信息'
+        verbose_name_plural = '寺庙信息'
+
 
 class lm(models.Model):
     id = models.AutoField(primary_key=True)
@@ -56,5 +63,33 @@ class lm(models.Model):
     is_delete = models.BooleanField(default=False)
     up_user = models.TextField(default='admin', blank=True, null=True)
 
+    def __str__(self):
+        return self.lmtitle
+
     class Meta:
         ordering = ('lmoldcode', 'lmlevel')
+        verbose_name = '栏目信息'
+        verbose_name_plural = '栏目信息'
+
+
+class Province(models.Model):
+    name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return str(self.name)
+
+
+class City(models.Model):
+    name = models.CharField(max_length=10)
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='city2province')
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Person(models.Model):
+    name = models.CharField(max_length=10)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='person2city')
+
+    def __str__(self):
+        return str(self.name)
