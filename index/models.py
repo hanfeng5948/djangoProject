@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models
 from django.utils.timezone import now
+from django.utils.html import format_html
 
 
 class PersonInfo(models.Model):
@@ -18,6 +19,7 @@ class SmInfo(models.Model):
                            related_name='old_lmcode',
                            default='30',
                            on_delete=models.SET_DEFAULT,
+                           verbose_name='栏目归属'
                            )
     # LM3 = models.CharField(max_length=50, verbose_name='栏目三')
     PAIXU = models.IntegerField(verbose_name='排序')
@@ -49,11 +51,18 @@ class SmInfo(models.Model):
         verbose_name = '寺庙信息'
         verbose_name_plural = '寺庙信息'
 
+    def colored_name(self):
+        color_code = 'red'
+        return format_html(
+            '<span style="color:{};">{}</span>', color_code, self.LM.lmtitle
+        )
+    colored_name.short_description = '栏目名称'
+
 
 class lm(models.Model):
     id = models.AutoField(primary_key=True)
     lmoldcode = models.IntegerField(db_index=True)
-    lmtitle = models.CharField(max_length=32, null=True, blank=True)
+    lmtitle = models.CharField(max_length=32, null=True, blank=True, verbose_name='栏目归属')
     lmlevel = models.IntegerField()
     lmcode = models.CharField(max_length=27, default='001000000')
     pic = models.CharField(max_length=254, null=True, blank=True)
